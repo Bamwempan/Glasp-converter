@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./images/icons8-ebook-color-16.png">
+    <link rel="icon" type="image/png" href="./images/icons8-ebook-color-32.png">
+    <link rel="icon" type="image/png" href="./images/icons8-ebook-color-96.png">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+    <input type="file" name="File Upload" id="txtFileUpload" accept=".csv" />
+    <p id="demo"></p>
+    <script defer>
+
+        document.getElementById('txtFileUpload').addEventListener('change', upload, false);
+
+        function upload(evt) {
+        
+            var data = null;
+            var file = evt.target.files[0];
+            var reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function(event) {
+                var csvData = event.target.result;
+                
+                var data = Papa.parse(csvData, {header : true});
+                
+                console.log(data);
+                    var content = ""
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i]["Highlight Color"] == 'Yellow') {
+                            content += '> [!accord] <br> >' + data.data[i]["Highlight Text"] + '<br><br>'
+                        }
+                        if (data.data[i]["Highlight Color"] == 'Blue') {
+                            content += '> [!information] <br> >' + data.data[i]["Highlight Text"] + '<br><br>'
+                        }
+                        if (data.data[i]["Highlight Color"] == 'Green') {
+                            content += '> [!approfondir] <br> >' + data.data[i]["Highlight Text"] + '<br><br>'
+                        }
+                        if (data.data[i]["Highlight Color"] == 'Red') {
+                            content += '> [!désaccord] <br> >' + data.data[i]["Highlight Text"] + '<br><br>'
+                        }
+                    }
+                document.getElementById("demo").innerHTML = content;
+                document.getElementById("txtFileUpload").remove()
+            };
+            reader.onerror = function() {
+                alert('Unable to read ' + file.fileName);
+            };
+
+        }
+
+    </script>
+</body>
+</html>
