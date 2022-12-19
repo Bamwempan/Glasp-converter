@@ -29,7 +29,7 @@
                 var data = Papa.parse(csvData, {header : true});
                 
                 console.log(data);
-                    var content = ""
+                    var content = "# Note <br><br>"
                     for (var i = 0; i < data.data.length; i++) {
                         if (data.data[i]["Highlight Color"] == 'Yellow') {
                             content += '> [!accord] <br> >' + data.data[i]["Highlight Text"] + '<br><br>'
