@@ -27,21 +27,19 @@
                 var csvData = event.target.result;
                 
                 var data = Papa.parse(csvData, {header : true});
-                
-                console.log(data);
                     var content = "# Note <br><br>"
                     for (var i = 0; i < data.data.length; i++) {
-                        if (data.data[i]["Highlight Color"] == 'Yellow') {
-                            content += '> [!accord] <br> >' + data.data[i]["Highlight Text"] + '<br><br>'
+                        if (data.data[i]["Highlight_Color"] == 'Yellow') {
+                            content += '> [!accord] <br> >' + data.data[i]["Highlight_Text"] + '<br><br>'
                         }
-                        if (data.data[i]["Highlight Color"] == 'Blue') {
-                            content += '> [!information] <br> >' + data.data[i]["Highlight Text"] + '<br><br>'
+                        if (data.data[i]["Highlight_Color"] == 'Blue') {
+                            content += '> [!information] <br> >' + data.data[i]["Highlight_Text"] + '<br><br>'
                         }
-                        if (data.data[i]["Highlight Color"] == 'Green') {
-                            content += '> [!approfondir] <br> >' + data.data[i]["Highlight Text"] + '<br><br>'
+                        if (data.data[i]["Highlight_Color"] == 'Green') {
+                            content += '> [!approfondir] <br> >' + data.data[i]["Highlight_Text"] + '<br><br>'
                         }
-                        if (data.data[i]["Highlight Color"] == 'Red') {
-                            content += '> [!désaccord] <br> >' + data.data[i]["Highlight Text"] + '<br><br>'
+                        if (data.data[i]["Highlight_Color"] == 'Red') {
+                            content += '> [!désaccord] <br> >' + data.data[i]["Highlight_Text"] + '<br><br>'
                         }
                     }
                 document.getElementById("demo").innerHTML = content;
